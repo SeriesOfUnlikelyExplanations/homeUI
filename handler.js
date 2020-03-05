@@ -1,18 +1,17 @@
-'use strict';
+const serverless = require("serverless-http");
+const express = require("express");
+const path = require("path");
+var cookie = require('cookie')
 
-module.exports.hello = async event => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: 'Go Serverless v1.0! Your function executed successfully!',
-        input: event,
-      },
-      null,
-      2
-    ),
-  };
+const app = express();
 
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
-};
+app.set('views',path.join(__dirname,"views"))
+app.set("view engine","hbs")
+
+
+app.get("/", (req, res) => {
+  res.status(200).render("index");
+});
+
+
+module.exports.homeUI = serverless(app);
