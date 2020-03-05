@@ -1,0 +1,18 @@
+{
+  "name": "homeui",
+  "version": "1.0.0",
+  "description": "UI for homes project",
+  "main": "handler.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.1.0",
+    "serverless-http": "^2.3.2",
+    "serverless-offline": "^5.12.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tom Woodard <woodard.thomas@gmail.com>",
+  "license": "ISC"
+}
