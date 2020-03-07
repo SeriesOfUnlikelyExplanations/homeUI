@@ -1,6 +1,7 @@
 // routes.js
 const express = require('express');
 const router = express.Router();
+const { body,validationResult, sanitizeBody } = require('express-validator/check');
 
 router.get("/", (req, res) => {
   res.status(200).render("index");
