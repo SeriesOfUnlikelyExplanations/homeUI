@@ -1,17 +1,29 @@
 // routes.js
 const express = require('express');
 const router = express.Router();
-const { body,validationResult, sanitizeBody } = require('express-validator/check');
+const { check, validationResult } = require('express-validator');
 
 router.get("/", (req, res) => {
-  res.status(200).render("index");
+  res.render("index");
 });
 
+
+//https://www.npmjs.com/package/address-validator
 router.get("/address", (req, res) => {
-  res.status(200).render("address");
+  res.render("address");
 });
 
-router.post('/address', (req, res) => {
+router.post('/address', [
+  check('address_field')
+    .isLength({ min: 1 }).withMessage('Address field cannot be blank')
+    .matches(/\d/).withMessage('must contain a number')
+], (req, res) => {
+  console.log(req.body);
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    
+    return res.render('address', {errors: JSON.stringify(errors)});
+  }
   res.render('address', {
     data: req.body, // { address }
     errors: {
