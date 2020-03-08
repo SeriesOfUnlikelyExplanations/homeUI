@@ -4,12 +4,13 @@
   "description": "UI for homes project",
   "main": "handler.js",
   "dependencies": {
+    "serverless" "^1.65.0",
     "address-validator": "^0.2.3",
     "express": "^4.17.1",
     "express-validator": "^6.4.0",
-    "hbs": "^4.1.0",
     "serverless-http": "^2.3.2",
-    "serverless-offline": "^5.12.1"
+    "serverless-offline": "^5.12.1",
+    "express-hbs": "^2.3.1"
   },
   "devDependencies": {},
   "scripts": {
