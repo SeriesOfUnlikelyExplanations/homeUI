@@ -4,7 +4,8 @@ provider:
   runtime: nodejs12.x
   cfnRole: arn:aws:iam::718523126320:role/serverless
   stage: prod
-#  region: us-east-1
+  environment:
+    locationIQKey: ${ssm:/home/locationIQKey~true}
 
 functions:
   app:
