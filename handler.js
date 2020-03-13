@@ -9,16 +9,18 @@ app.use(express.json())
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
-// app.engine('hbs', hbs.express4({
-   // partialsDir: __dirname + '/views/partials'
- // }));
 
+
+//views
 app.set("view engine","hbs")
 app.engine('hbs', handlebars({
   layoutsDir: __dirname + '/views',
   defaultLayout: 'layout',
   extname: 'hbs'
 }));
+// app.engine('hbs', hbs.express4({
+   // partialsDir: __dirname + '/views/partials'
+ // }));
 app.set('views',path.join(__dirname,"views"))
 
 // Routing
