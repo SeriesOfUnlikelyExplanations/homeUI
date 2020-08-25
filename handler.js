@@ -27,5 +27,5 @@ app.set('views',path.join(__dirname,"views"))
 app.get("/", (req, res) => res.render("index"));
 app.use('/comps', require('./getComps'));
 
-module.exports.homeUI = serverless(app);
+module.exports.rental = serverless(app);
 
