@@ -4,16 +4,15 @@
   "description": "UI for homes project",
   "main": "handler.js",
   "dependencies": {
-    "address-validator": "^0.2.3",
-    "bent": "^7.1.1",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "express-validator": "^6.4.0",
     "serverless": "^1.79.0",
-    "serverless-http": "^2.3.2",
+    "serverless-http": "^2.3.2"
+  },
+  "devDependencies": {
     "serverless-offline": "^5.12.1"
   },
-  "devDependencies": {},
   "scripts": {
     "testit": "echo \"Error: no test specified\" && exit 1",
     "runit": "serverless offline start",
