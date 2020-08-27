@@ -6,10 +6,7 @@ const path = require("path");
 var app = express();
 
 app.use(express.json())
-
-// Middleware
 app.use(express.urlencoded({ extended: true }));
-
 
 //views
 app.set("view engine","hbs")
@@ -18,13 +15,19 @@ app.engine('hbs', handlebars({
   defaultLayout: 'layout',
   extname: 'hbs'
 }));
-// app.engine('hbs', hbs.express4({
-   // partialsDir: __dirname + '/views/partials'
- // }));
+
 app.set('views',path.join(__dirname,"views"))
 
 // Routing
-app.get("/", (req, res) => res.render("index"));
+app.get("/", (req, res) => {
+  res.status(200).render("index");
+});
+
+app.get("/PrivacyPolicy.html", (req, res) => {
+  res.status(200).render("PrivacyPolicy");
+});
+
+
 app.use('/comps', require('./getComps'));
 
 module.exports.rental = serverless(app);

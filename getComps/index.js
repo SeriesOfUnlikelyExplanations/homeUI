@@ -1,8 +1,5 @@
 const router = require("express").Router();
-var addressValidator = require('address-validator');
 const { check, validationResult } = require('express-validator');
-var _ = require('underscore');
-
 
 //https://appdividend.com/2018/02/06/express-form-validation-tutorial/
 //https://www.npmjs.com/package/address-validator
@@ -18,13 +15,13 @@ router.post("/address",
     if (!errors.isEmpty()) {
       res.render("address", { errors : errors.array() });
     } else {
-      obj.then(function(val) { 
-				// if( val.length > 1) {
-					res.render("getComps/address", { result : Array.from(val, x => x['display_name']) });
-				// } else {
-					// res.render("getComps/address", { result : ['Success!'] });
-				// }
-			});
+      obj.then(function(val) {
+        // if( val.length > 1) {
+          res.render("getComps/address", { result : Array.from(val, x => x['display_name']) });
+        // } else {
+          // res.render("getComps/address", { result : ['Success!'] });
+        // }
+      });
     }
 });
 
@@ -35,7 +32,7 @@ async function checkAddress(val) {
   var getJSON = bent('json');
   try {
     return await getJSON("https://us1.locationiq.com/v1/search.php?"
-      +"key=" + process.env.locationIQKey 
+      +"key=" + process.env.locationIQKey
       +"&q=" + val
       +"&format=json");
   } catch (e) {

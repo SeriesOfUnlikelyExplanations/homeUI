@@ -1,13 +1,13 @@
 {
-  "name": "homeui",
+  "name": "OnwardRentalManager",
   "version": "1.0.0",
-  "description": "UI for homes project",
+  "description": "Workflow application for managing rental properties",
   "main": "handler.js",
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "express-validator": "^6.4.0",
-    "serverless": "^1.79.0",
+    "serverless": "^1.80.0",
     "serverless-http": "^2.3.2"
   },
   "devDependencies": {
@@ -15,9 +15,17 @@
   },
   "scripts": {
     "testit": "echo \"Error: no test specified\" && exit 1",
-    "runit": "serverless offline start",
-    "deployit": "sls deploy"
+    "runit": "serverless offline start"
   },
   "author": "Tom Woodard <woodard.thomas@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SeriesOfUnlikelyExplanations/rental-manager.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/SeriesOfUnlikelyExplanations/rental-manager/issues"
+  },
+  "homepage": "https://rental.always-onward.com"
 }

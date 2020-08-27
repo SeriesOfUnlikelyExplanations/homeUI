@@ -5,4 +5,9 @@ WORK IN PROGRESS!!!!!
 
 Goal is to have the following:
 1. Get calendar from air-bnb.
-2. Dynamically change lock codes 
+2. Dynamically change lock codes
+
+
+TODO:
+1. https://rental-manager.always-onward.com/contact-us add contact us (funnel to github?)
+2.
