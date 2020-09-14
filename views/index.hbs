@@ -12,8 +12,7 @@
       $("#signout-button, #home-button").hide()
       $("#signin-button").show()
     } else {
-      $("#signout-button, #home-button").show()
-      $("#signin-button").hide()
+      window.location.href = "/home";
     }
     $("#signout-button").click(function () {
       localStorage.removeItem('rental-auth-token')
