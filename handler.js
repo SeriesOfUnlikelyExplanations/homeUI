@@ -1,34 +1,30 @@
 const serverless = require("serverless-http");
-const express = require("express");
+const express = require('express');
 const handlebars = require('express-handlebars');
 const path = require("path");
 
-var app = express();
+const standard_app = function(app) {
+  app.use('/public', express.static(path.join(__dirname, '/assets')))
+  app.use(express.json())
+  app.use(express.urlencoded({ extended: true }));
+  //views
+  app.set("view engine","hbs")
+  app.engine('hbs', handlebars({
+    layoutsDir: __dirname + '/views',
+    defaultLayout: 'layout',
+    extname: 'hbs'
+  }));
+  app.set('views',path.join(__dirname, "views"))
+}
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }));
-
-//views
-app.set("view engine","hbs")
-app.engine('hbs', handlebars({
-  layoutsDir: __dirname + '/views',
-  defaultLayout: 'layout',
-  extname: 'hbs'
-}));
-
-app.set('views',path.join(__dirname,"views"))
-
+var publicApp = express();
+standard_app(publicApp)
 // Routing
-app.get("/", (req, res) => {
-  res.status(200).render("index");
-});
+require('./publicRoutes')(publicApp);
+module.exports.public = serverless(publicApp);
 
-app.get("/PrivacyPolicy.html", (req, res) => {
-  res.status(200).render("PrivacyPolicy");
-});
-
-
-app.use('/comps', require('./getComps'));
-
-module.exports.rental = serverless(app);
-
+var privateapp = express();
+standard_app(privateapp)
+// Routing
+require('./privateRoutes')(privateapp);
+module.exports.private = serverless(privateapp);

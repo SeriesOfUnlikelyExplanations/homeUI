@@ -5,15 +5,24 @@ provider:
   cfnRole: arn:aws:iam::718523126320:role/serverless
   stage: prod
   environment:
-    locationIQKey: ${ssm:/home/locationIQKey~true}
+    locationIQKey: ${ssm:/rental-manager/locationIQKey~true}
 
 functions:
-  app:
-    handler: handler.rental
+  public:
+    handler: handler.public
     events:
-        - http: ANY /
-        - http: 'ANY {proxy+}'
-
+      - http: ANY /
+      - http: ANY /public/{proxy+}
+  private:
+    handler: handler.private
+    events:
+      - http:
+          path: /home
+          method: ANY
+          authorizer:
+            type: COGNITO_USER_POOLS
+            authorizerId:
+              Ref: ApiGatewayAuthorizer
 
 resources:
   Resources:
@@ -38,6 +47,18 @@ resources:
         GenerateSecret: False
         UserPoolId:
           Ref: CognitoUserPool
+    ApiGatewayAuthorizer:
+      DependsOn:
+        - ApiGatewayRestApi
+      Type: AWS::ApiGateway::Authorizer
+      Properties:
+        Name: cognito-authorizer
+        IdentitySource: method.request.header.Authorization
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        Type: COGNITO_USER_POOLS
+        ProviderARNs:
+          - Fn::GetAtt: [CognitoUserPool, Arn]
 
 plugins:
   - serverless-offline
