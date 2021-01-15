@@ -8,12 +8,7 @@ provider:
     locationIQKey: ${ssm:/rental-manager/locationIQKey~true}
 
 functions:
-  public:
-    handler: handler.public
-    events:
-      - http: ANY /
-      - http: ANY /public/{proxy+}
-  private:
+  onward:
     handler: handler.private
     events:
       - http:
@@ -26,27 +21,6 @@ functions:
 
 resources:
   Resources:
-    CognitoUserPool:
-      Type: "AWS::Cognito::UserPool"
-      Properties:
-        MfaConfiguration: OFF
-        UserPoolName: rentalUsers
-        UsernameAttributes:
-          - email
-        Policies:
-          PasswordPolicy:
-            MinimumLength: 6
-            RequireLowercase: False
-            RequireNumbers: True
-            RequireSymbols: False
-            RequireUppercase: True
-    CognitoUserPoolClient:
-      Type: "AWS::Cognito::UserPoolClient"
-      Properties:
-        ClientName: rental
-        GenerateSecret: False
-        UserPoolId:
-          Ref: CognitoUserPool
     ApiGatewayAuthorizer:
       DependsOn:
         - ApiGatewayRestApi
@@ -62,3 +36,17 @@ resources:
 
 plugins:
   - serverless-offline
+  - serverless-s3-deploy
+
+custom:
+  assets:
+    targets:
+     - bucket:
+         Ref: OnwardRentalBucket
+       empty: true
+       files:
+        - source: assets/
+          globs: '*'
+        - source: node_modules/amazon-cognito-identity-js/dist/
+          globs: 'amazon-cognito-identity.min.js'
+    auto: true

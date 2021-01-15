@@ -13,11 +13,13 @@
     "serverless-http": "^2.3.2"
   },
   "devDependencies": {
-    "serverless-offline": "^5.12.1"
+    "serverless-offline": "^5.12.1",
+    "serverless-s3-deploy": "^0.9.0"
   },
   "scripts": {
     "testit": "echo \"Error: no test specified\" && exit 1",
-    "runit": "sls offline"
+    "offline": "sls offline"
+    "deploy": "sls deploy"
   },
   "author": "Tom Woodard <woodard.thomas@gmail.com>",
   "license": "ISC",

@@ -4,7 +4,8 @@ const handlebars = require('express-handlebars');
 const path = require("path");
 
 const standard_app = function(app) {
-  app.use('/public', express.static(path.join(__dirname, '/assets')))
+  app.use('/assets', express.static(path.join(__dirname, '/assets')))
+
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }));
   //views

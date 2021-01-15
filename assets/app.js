@@ -16,11 +16,18 @@ function getIDToken(token_name){
     return this_id_token
   }
   let stored_id_token = localStorage.getItem(token_name)
-  // test it to see if it's valid
+  // test it to see if it's there
   if (stored_id_token) {
     return stored_id_token
   }
   return null
+}
+// Check if the user is signed in. If they are, continue. Otherwise, go to home.
+function preparePage(){
+  const id_token = getIDToken('rental-auth-token')
+  if (id_token == null){
+    window.location.href = "/login";
+  }
 }
 
 function redirect(URL, token_name){
